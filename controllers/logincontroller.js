@@ -22,6 +22,7 @@ router.post('/', function(req, res) {
             } else {
             res.status(502).send({error: "failed to authenticate"});
             }
+   
         })
     } else {
         res.status(500).send({error: "server error"})

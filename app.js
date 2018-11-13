@@ -19,10 +19,10 @@ app.use(require('./middleware/headers'))
 /****EXPOSED****/
 app.use('/api/user', user);  // creates a user 
 app.use('/api/login', login);  // allows an already existing user to login
+app.use(require('./middleware/validate-session'))
 app.use('/api/power', power);
 
 /****MIDDLEWARE****/
-app.use(require('./middleware/validate-session'))
 
 /****PROTECTED ROUTES****/
 
