@@ -39,15 +39,27 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json({error: err}))
 })
 
-router.put('/:id', (req, res) => {
-    if(!req.errors) {
-        Power.update(req.body, { where: {id: req.params.id }})
-        .then(power => res.status(200).json(power))
-        .catch( err => res.status(500).json(req.errors))
-    } else {
-        res.status(500).json(req.error)
-    }
+router.put("/update/:id", function (req, res) {
+    let powerID = req.params.id
+    let name = req.body.power.name
+    let tags = req.body.power.tags
+    let description = req.body.power.description
+
+    Power.update({
+        name: name,
+        tags: tags,
+        description: description
+    }, { where: { id: powerID } } )
+        .then(
+            function createUpdateSuccess(updatedPower) {
+                res.status(200).json(updatedPower)
+            },
+            function createUpdateError(err) {
+                res.send(500, err.message)
+            }
+        )
 })
+
 
 router.delete('/:id',validateSession, (req, res) => {
     if (!req.errors) {
