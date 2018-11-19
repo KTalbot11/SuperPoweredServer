@@ -10,7 +10,7 @@ let login = require('./controllers/logincontroller')
 let power = require('./controllers/powercontroller')
 
 
-sequelize.sync({force:true}); 
+sequelize.sync(); 
 
 app.use(bodyParser.json());
 
