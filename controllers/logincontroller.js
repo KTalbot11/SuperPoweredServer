@@ -11,7 +11,7 @@ router.post('/', function(req, res) {
      function(user) {
         if(user) {
         bcrypt.compare(req.body.user.password, user.password, function(err, matches) {
-             console.log("the value matches", matches)
+             
         if(matches) {
             var token = jwt.sign({ id: user.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
                 res.json({
